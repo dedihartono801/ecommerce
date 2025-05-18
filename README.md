@@ -24,16 +24,43 @@ List API:
 
 List Implementation Concept:
 - Gracefully Shutdown
-- Release Stock with RabbitMQ DLX (Dead Letter Exchange) / DLQ (Dead Letter Queue) if payment is not made within a specified time 
+    https://github.com/dedihartono801/ecommerce/blob/master/cmd/main.go#L124
+
+- Stock Reversal using RabbitMQ DLX (Dead Letter Exchange) / DLQ (Dead Letter Queue) if payment is not made within a specified time 
+    https://github.com/dedihartono801/ecommerce/blob/master/internal/app/worker/producer.go
+
 - Concurrency when update stock
-- Locking (Row Level Locking) with strategy to prevent deadlock
+    https://github.com/dedihartono801/ecommerce/blob/master/internal/app/usecase/transaction/transaction.go#L73
+
+- Locking Row (SELECT FOR UPDATE) with strategy to prevent deadlock
+    https://github.com/dedihartono801/ecommerce/blob/master/internal/app/repository/transaction/transaction.go#L145
+
 - Connection Pooling
+    https://github.com/dedihartono801/ecommerce/blob/master/database/mysql.go#L17
+
 - Unit Test
-- Logging with Grafana, Loki, Promtail
+    https://github.com/dedihartono801/ecommerce/blob/master/internal/app/usecase/product/product_test.go
+
+- Generate Mock Repository using Mockgen
+    https://github.com/dedihartono801/ecommerce/blob/master/Makefile#L32
+
+- Dockerize Logging (promtail, loki, grafana)
+    https://github.com/dedihartono801/ecommerce/blob/master/docker-compose.yaml
+
+- Write logs to file and terminal/console (stdout), so they can be scraped by promtail
+    https://github.com/dedihartono801/ecommerce/blob/master/pkg/logger/logger.go#L13
+
 - Migration
-- Docker Compose
+    https://github.com/dedihartono801/ecommerce/tree/master/migrations
+
+- Dockerfile Multi Stage
+    https://github.com/dedihartono801/ecommerce/blob/master/cmd/Dockerfile
+
 - Sample Script CI/CD with Github Actions
+    https://github.com/dedihartono801/ecommerce/blob/master/.github/workflows/github-action-deploy.yml
+
 - Sample Script CI/CD with Jenkins
+    https://github.com/dedihartono801/ecommerce/blob/master/Jenkinsfile
 
 ## Install Migration
 
